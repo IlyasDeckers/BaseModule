@@ -7,19 +7,6 @@ use Exception;
 trait Transaction
 {
     /**
-     * Check if the method exists.
-     *
-     * @param string $method
-     * @return Exeption
-     */
-    private function methodExists(string $method)
-    {
-        if (!method_exists($this, $method)) {
-            throw new Exception("Method doesn't exist");
-        }
-    }
-
-    /**
      * Call the private function with database transactions
      * for the methods store, update and delete.
      *
@@ -45,5 +32,18 @@ trait Transaction
         DB::commit();
 
         return $response;
+    }
+
+    /**
+     * Check if the method exists.
+     *
+     * @param string $method
+     * @return Exeption
+     */
+    private function methodExists(string $method)
+    {
+        if (!method_exists($this, $method)) {
+            throw new Exception("Method doesn't exist");
+        }
     }
 }
