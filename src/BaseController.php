@@ -17,18 +17,8 @@ class BaseController extends Controller
      *
      * @return mixed
      */
-    public function index(Request $request)
+    public function index(Request $request) : object
     {
-        // $u = \Clockwork\Contracts\Models\Contract::scopes(['active'])->with(['customer', 'user'])->get();
-        // $result = [];
-        // foreach ($u as $x) {
-        //     $result[] = [
-        //         'name' => $x->user->name,
-        //         'function' => $x->function,
-        //         'customer' => $x->customer->name
-        //     ];
-        // }
-        // return $result;
         return $this->resource::collection(
             $this->model->getAll($request)
         );
@@ -40,11 +30,18 @@ class BaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function store(Request $request)
+    public function store(Request $request) : object
     {
-        return new $this->resource(
-            $this->model->store($request)
-        );
+        // Store the resource
+        $result = $this->model->store($request);
+
+        // Check if the result is an instance  of Collection. if it
+        // contains a collection return a collection resource.
+        if ($result instanceof Collection) {
+            return $this->resource::collection($result);
+        }
+
+        return new $this->resource($result);
     }
 
     /**
@@ -53,7 +50,7 @@ class BaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function show(Request $request)
+    public function show(Request $request) : object
     {
         return new $this->resource(
             $this->model->find($request)
@@ -66,7 +63,7 @@ class BaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function update(Request $request)
+    public function update(Request $request) : object
     {
         return new $this->resource(
             $this->model->update($request)

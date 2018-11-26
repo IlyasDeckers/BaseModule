@@ -1,6 +1,8 @@
 <?php
 namespace Clockwork\Base\Traits;
 
+use Auth;
+
 trait ResolveId
 {
     /**

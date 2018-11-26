@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Facades\Clockwork\Services\Logging\Logger;
 use Clockwork\Base\BaseController;
 use Illuminate\Http\Request;
-use Clockwork\Models\User;
+use Clockwork\Users\Models\User;
 use Carbon\Carbon;
 use Response;
 use Auth;
@@ -50,6 +50,7 @@ class AuthController extends BaseController
 
         return response()->json([
             'user' => $user->toArray(),
+            'venice' => config('venice.config'),
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
