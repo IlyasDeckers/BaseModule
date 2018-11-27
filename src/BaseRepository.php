@@ -3,11 +3,13 @@ namespace Clockwork\Base;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Clockwork\Base\Traits\Transaction;
+use Clockwork\Base\Traits\ValidatesRequests;
 
 abstract class BaseRepository
 {
+    use ValidatesRequests, Transaction;
+
     protected $request;
 
     /**
@@ -30,7 +32,7 @@ abstract class BaseRepository
      * @param object $request
      * @return collection
      */
-    public function getAll(object $request)
+    public function getAll(object $request) 
     {
         return $this->collectionResponse(
             $request,
@@ -45,7 +47,7 @@ abstract class BaseRepository
      * @param [type] $query
      * @return collection
      */
-    public function itemResponse(object $request, $query)
+    public function itemResponse(object $request, object $query) 
     {
         $this->request = $request;
 
@@ -62,7 +64,7 @@ abstract class BaseRepository
      * @param object $query
      * @return collection
      */
-    public function collectionResponse(object $request, object $query)
+    public function collectionResponse(object $request, object $query) 
     {
         $this->request = $request;
 
@@ -85,7 +87,7 @@ abstract class BaseRepository
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function filter(Builder $query)
+    public function filter(Builder $query) 
     {
         return $query->search($this->request->filter);
     }
@@ -96,7 +98,7 @@ abstract class BaseRepository
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function with(Builder $query)
+    public function with(Builder $query) 
     {
         return $query->with(
             explode(',', $this->request->with)
@@ -109,7 +111,7 @@ abstract class BaseRepository
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopes(Builder $query)
+    public function scopes(Builder $query) 
     {
         $decoded = json_decode($this->request->scopes, true);
 
@@ -131,7 +133,7 @@ abstract class BaseRepository
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function sort(Builder $query)
+    public function sort(Builder $query) 
     {
         foreach (explode(',', $this->request->sort) as $sort) {
             list($sortCol, $sortDir) = explode('|', $sort);
@@ -147,7 +149,7 @@ abstract class BaseRepository
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function noSort(Builder $query)
+    public function noSort(Builder $query) 
     {
         return $query->orderBy('id', 'asc');
     }
