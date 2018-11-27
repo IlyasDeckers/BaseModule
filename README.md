@@ -195,7 +195,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 
     /**
-     * Update a purchase
+     * Update a user
      *
      * @param object $request
      * @return void
