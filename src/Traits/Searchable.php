@@ -25,7 +25,9 @@ trait Searchable
      */
     public function scopeSearch(Builder $q, $search, $threshold = null, $entireText = false, $entireTextOnly = false)
     {
-        return $this->scopeSearchRestricted($q, $search, null, $threshold, $entireText, $entireTextOnly);
+        return $this->scopeSearchRestricted(
+            $q, $search, null, $threshold, $entireText, $entireTextOnly
+        );
     }
 
     public function scopeSearchRestricted(Builder $q, $search, $restriction, $threshold = null, $entireText = false, $entireTextOnly = false)
@@ -50,14 +52,21 @@ trait Searchable
         {
             $relevance_count += $relevance;
             if (!$entireTextOnly) {
-                $queries = $this->getSearchQueriesForColumn($query, $column, $relevance, $words);
+                $queries = $this->getSearchQueriesForColumn(
+                    $query, $column, $relevance, $words
+                );
             } else {
                 $queries = [];
             }
             if ( ($entireText === true && count($words) > 1) || $entireTextOnly === true )
             {
-                $queries[] = $this->getSearchQuery($query, $column, $relevance, [$search], 50, '', '');
-                $queries[] = $this->getSearchQuery($query, $column, $relevance, [$search], 30, '%', '%');
+                $queries[] = $this->getSearchQuery(
+                    $query, $column, $relevance, [$search], 50, '', ''
+                );
+
+                $queries[] = $this->getSearchQuery(
+                    $query, $column, $relevance, [$search], 30, '%', '%'
+                );
             }
             foreach ($queries as $select)
             {

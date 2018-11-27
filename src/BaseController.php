@@ -28,6 +28,19 @@ class BaseController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    public function show(Request $request) : object
+    {
+        return new $this->resource(
+            $this->model->find($request)
+        );
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,19 +60,6 @@ class BaseController extends Controller
         }
 
         return new $this->resource($result);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
-    public function show(Request $request) : object
-    {
-        return new $this->resource(
-            $this->model->find($request)
-        );
     }
 
     /**

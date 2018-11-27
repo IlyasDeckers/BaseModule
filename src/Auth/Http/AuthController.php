@@ -27,26 +27,20 @@ class AuthController extends BaseController
      */
     public function login(Request $request)
     {
-        $credentials = request(['email', 'password']);
-
+        $user = $request->user();
+        
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
             return $this->sendLockoutResponse($request);
         }
 
-        if(!Auth::attempt($credentials)) {
+        if(!Auth::attempt(request(['email', 'password']))) {
             return Response::json(['message' => 'Wrong credentials'], 401);
         }
 
-        $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-
-        if ($request->remember_me) {
-            $token->expires_at = Carbon::now()->addWeeks(1);
-        }
-
-        $token->save();
+        $tokenResult->token->expires_at = Carbon::now()->addWeeks(1);
+        $tokenResult->token->save();
 
         return response()->json([
             'user' => $user->toArray(),
