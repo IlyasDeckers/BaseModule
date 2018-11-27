@@ -57,24 +57,10 @@ if (!function_exists('format')) {
     }
 }
 
-if (!function_exists('webpack')) {
-    /**
-     * @param $filename
-     * @return string
-     * @throws Exception
-     */
-    function webpack($filename)
+if (!function_exists('timeToDecimal')) {
+    function timeToDecimal($value)
     {
-        static $manifests = [];
-        $manifestPath = public_path('static/manifest.json');
-
-        if (!isset($manifests[$manifestPath])) {
-            if (!file_exists($manifestPath)) {
-                throw new Exception('The webpack manifest does not exist.');
-            }
-            $manifests[$manifestPath] = json_decode(file_get_contents($manifestPath), true);
-        }
-
-        return $manifests[$manifestPath][$filename] ?? '';
+        $hm = explode(":", $value);
+        return ($hm[0] + ($hm[1] / 60));
     }
 }
