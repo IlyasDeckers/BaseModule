@@ -1,16 +1,19 @@
 <?php
 namespace Clockwork\Base;
 
+use Clockwork\Base\Traits\ValidatesRequests;
 use Clockwork\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
+    use ValidatesRequests;
+
     protected $model;
 
     protected $resource;
 
-    protected $request = null;
+    protected $rules = [];
 
     /**
      * Display a listing of the resource.
@@ -32,6 +35,8 @@ class BaseController extends Controller
      */
     public function store(Request $request) : object
     {
+        $this->validator(__FUNCTION__, $request);
+
         // Store the resource
         $result = $this->model->store($request);
 
@@ -65,6 +70,8 @@ class BaseController extends Controller
      */
     public function update(Request $request) : object
     {
+        $this->validator(__FUNCTION__, $request);
+
         return new $this->resource(
             $this->model->update($request)
         );
@@ -78,6 +85,6 @@ class BaseController extends Controller
      */
     public function destroy(int $id)
     {
-        //
+        $this->model->destroy($id);
     }
 }
