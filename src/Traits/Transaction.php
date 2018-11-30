@@ -23,7 +23,10 @@ trait Transaction
             DB::beginTransaction();
             // Check if the method exists on the class this trait 
             // has been implemented in. Next we call this function.
-            $this->methodExists($method);
+            if (!method_exists($this, $method)) {
+                throw new Exception("Method '{$method}' doesn't exist");
+            }
+
             $response = call_user_func_array([$this, $method], $args);
             DB::commit();
         } catch (Exception $e) {
@@ -34,18 +37,5 @@ trait Transaction
         }
 
         return $response;
-    }
-
-    /**
-     * Check if the method exists.
-     *
-     * @param string $method
-     * @return Exeption
-     */
-    private function methodExists(string $method)
-    {
-        if (!method_exists($this, $method)) {
-            throw new Exception("Method '{$method}' doesn't exist");
-        }
     }
 }

@@ -27,7 +27,7 @@ class AuthController extends BaseController
      */
     public function login(Request $request)
     {
-        $user = $request->user();
+        $user = User::where('email', $request->email)->first();
         
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);

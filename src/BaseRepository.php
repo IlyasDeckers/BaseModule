@@ -4,11 +4,10 @@ namespace Clockwork\Base;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Clockwork\Base\Traits\Transaction;
-use Clockwork\Base\Traits\ValidatesRequests;
 
 abstract class BaseRepository
 {
-    use ValidatesRequests, Transaction;
+    use Transaction;
 
     protected $request;
 
