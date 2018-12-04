@@ -64,3 +64,13 @@ if (!function_exists('timeToDecimal')) {
         return ($hm[0] + ($hm[1] / 60));
     }
 }
+
+if (!function_exists('generatePassword')) {
+    function generatePassword()
+    {
+        return substr(
+            str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*+?"), 0, 8 
+        );
+    }
+}
+
