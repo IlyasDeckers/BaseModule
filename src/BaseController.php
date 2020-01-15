@@ -68,7 +68,7 @@ abstract class BaseController extends Controller implements BaseControllerInterf
      */
     public function store(Request $request) : object
     {
-        $result = $this->model->store($request);
+        $result = $this->model->store($request->validated);
 
         if ($result instanceof Collection) {
             return $this->resource::collection($result);
