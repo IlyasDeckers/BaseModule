@@ -17,17 +17,17 @@ GET /api/v1/books?with=author.contacts
 
 [
     {
-        id: 1,
-        title: "An awesome title",
-        Author: [
-            id: 1,
-            name: "an awesome name",
-            contacts: {
-                [
-                    id: 1
-                ],
-            }
-        ]
+        "id": 1,
+        "title": "An awesome title",
+        "Author": {
+            "id": 1,
+            "name": "an awesome name",
+            "contacts": [
+                {
+                    "id": 1
+                }
+            ]
+        }
     }
 ]
 ```
@@ -53,9 +53,9 @@ GET /api/v1/users?scopes=active
 
 [
     {
-        id: 1,
-        name: "John Doe",
-        active: true
+        "id": 1,
+        "name": "John Doe",
+        "active": true
     }
 ]
 ```
