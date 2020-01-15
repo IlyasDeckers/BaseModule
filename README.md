@@ -1,11 +1,11 @@
 # Laravel base module
-This package is aimed at PHP developers who like to write and organize their code in an fast and readable way. Using this package enables you to create CRUD applications while using Domain Driven Design and the repository pattern.
+This package is aimed at PHP developers who like to write and organize their code in a fast and readable way. Using this package enables you to create CRUD applications while using Domain Driven Design and the repository pattern.
 
 ## Why would I use it?
-Ever wondered why we recreate so much logic in Laravel? Controllers contain a lot of simmilarities, all our requests need validation, database transactions,... Why not encapsulate all this logic into a single package that handles almost everything.
+Ever wondered why we recreate so much logic in Laravel? Controllers contain a lot of similarities, all our requests need validation, database transactions,... Why not encapsulate all this logic into a single package that handles almost everything.
 
 ## Example Controller
-In the example below we see a fully functioning `UserController` that handles everything we need from a CRUD controller in a handfull of lines. Most methods are inherited from the `BaseController`. These methods can be overwritten if needed.
+In the example below, we see a fully functioning `UserController` that handles everything we need from a CRUD controller in a handful of lines. Most methods are inherited from the `BaseController`. These methods can be overwritten if needed.
 
 [documentation](https://github.com/IlyasDeckers/base-module/blob/master/docs/controllers.md)
 ```php
