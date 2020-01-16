@@ -7,7 +7,7 @@ interface BaseControllerInterface
 {
     public function index(Request $request) : object;
 
-    public function show(Request $request) : object;
+    public function show(int $id) : object;
 
     public function store(Request $request) : object;
 

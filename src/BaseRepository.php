@@ -12,7 +12,7 @@ abstract class BaseRepository extends BaseQueryBuilder implements BaseRepository
 {
     protected $model;
 
-    abstract public function store(Request $request) : object;
+    abstract public function store(array $data) : object;
 
     abstract public function update(array $data)  : object;
 
@@ -24,10 +24,10 @@ abstract class BaseRepository extends BaseQueryBuilder implements BaseRepository
      * @param object $request
      * @return item
      */
-    public function find(Request $request) : object
+    public function find(int $id) : object
     {
         return $this->itemResponse(
-            $this->model->where('id', $request->id)
+            $this->model->where('id', $id)
         );
     }
 
