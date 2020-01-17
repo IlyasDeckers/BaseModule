@@ -53,10 +53,10 @@ abstract class BaseController extends Controller implements BaseControllerInterf
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function show(Request $request) : object
+    public function show(int $id) : object
     {
         return new $this->resource(
-            $this->model->find($request)
+            $this->model->find($id)
         );
     }
 

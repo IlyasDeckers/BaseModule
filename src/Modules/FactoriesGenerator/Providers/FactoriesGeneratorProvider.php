@@ -3,11 +3,9 @@
 namespace IlyasDeckers\BaseModule\Modules\FactoriesGenerator\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use IlyasDeckers\BaseModule\FactoriesGenerator\Console\Commands\GenerateFactoriesCommand;
-use IlyasDeckers\BaseModule\TransactionMiddleware;
-use IlyasDeckers\BaseModule\ValidatorMiddleware;
+use IlyasDeckers\BaseModule\Modules\FactoriesGenerator\Commands\Console\GenerateFactoriesCommand;
 
-class BaseServiceProvider extends ServiceProvider
+class FactoriesGeneratorProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.

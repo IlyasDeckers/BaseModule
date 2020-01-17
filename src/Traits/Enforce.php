@@ -5,24 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\ValidationException;
 
-trait Validator
+trait Enforce
 {
-    /**
-     * Validate the incomming request.
-     *
-     * @param string $function
-     * @param object $request
-     * @return void
-     */
-    private function validator(string $function, object $request)
-    {
-        if (isset($this->rules[$function]) && !is_null($this->rules[$function])) {
-            $this->validate($request,
-                (new $this->rules[$function])->rules()
-            );
-        }
-    }
-
     /**
      *  Apply rules to the given request
      * 
